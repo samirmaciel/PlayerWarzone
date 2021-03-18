@@ -23,16 +23,23 @@ public class WebScrapingDados extends AsyncTask<Void, Void, List<String>> {
     protected List<String> doInBackground(Void... voids) {
         Document doc = null;
         String url = "https://cod.tracker.gg/warzone/profile/" + plataforma + "/" + nickName + "/overview";
+        String urlMatchs = "https://cod.tracker.gg/warzone/profile/atvi/dezk%236971848/matches";
 
         try {
-            doc = Jsoup.connect(url).get();
+            doc = Jsoup.connect(urlMatchs).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
         List<String> listaValores = new ArrayList<>();
-        for(int x = 0; x < 6; x++){
+        /*for(int x = 0; x < 6; x++){
             listaValores.add(doc.getElementsByClass("value").get(x).text());
         }
+        return listaValores;*/
+
+        for (int x = 0; x < 4; x++){
+            listaValores.add(doc.getElementsByAttribute("href").get(x).toString());
+        }
+
         return listaValores;
     }
 }

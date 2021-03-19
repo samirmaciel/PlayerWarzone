@@ -4,4 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    android:background="@color/black"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/background_Homeimage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/playerwarzone_background1" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ENTRAR"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerPlatform"
+        app:layout_constraintStart_toStartOf="@+id/spinnerPlatform"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPlatform" />
+
+    <EditText
+        android:id="@+id/inputNick"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="328dp"
+        android:background="@drawable/bg_input"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="NOME ID"
+        android:inputType="textPersonName"
+        android:paddingTop="3dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background_Homeimage" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinnerPlatform"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_input"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/inputNick"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputNick"
+        app:layout_constraintTop_toBottomOf="@+id/inputNick" />
+
+    <ImageView
+        android:id="@+id/soundMute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_music_off_24"
+        tools:ignore="VectorDrawableCompat" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+

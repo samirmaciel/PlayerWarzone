@@ -3,6 +3,8 @@ package com.samirmaciel.playerwarzone.model;
 import androidx.annotation.NonNull;
 
 public class Player {
+
+    private int id;
     private String nickname;
     private String platform;
     private String level;
@@ -21,6 +23,14 @@ public class Player {
     public Player(String nickname, String platform) {
         this.nickname = nickname;
         this.platform = platform;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNickname() {

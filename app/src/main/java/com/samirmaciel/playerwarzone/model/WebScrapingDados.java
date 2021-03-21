@@ -1,8 +1,11 @@
-package com.samirmaciel.playerwarzone;
+package com.samirmaciel.playerwarzone.model;
 
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.samirmaciel.playerwarzone.model.Player;
+import com.samirmaciel.playerwarzone.view.MainActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,10 +21,27 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
     public WebScrapingDados(Player player) {
         this.player = player;
 
+
+    }
+
+
+
+    @Override
+    protected void onPreExecute() {
+
+        MainActivity.exbirProgresso(true);
+
+    }
+
+    @Override
+    protected void onPostExecute(Player player) {
+        MainActivity.exbirProgresso(false);
+
     }
 
     @Override
     protected Player doInBackground(Void... voids) {
+        boolean isConnect = false;
 
         String[] split = player.getNickname().split("#");
         String nick = split[0];
@@ -39,7 +59,7 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
         }
 
 
-        boolean isConnect = false;
+
 
         try{
             System.out.println(doc.getElementsByClass("value"));

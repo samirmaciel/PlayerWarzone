@@ -1,4 +1,4 @@
-package com.samirmaciel.playerwarzone;
+package com.samirmaciel.playerwarzone.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,13 +11,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.samirmaciel.playerwarzone.R;
 import com.samirmaciel.playerwarzone.model.Player;
+import com.samirmaciel.playerwarzone.model.WebScrapingDados;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView backgroundImage;
     private ImageView btnMute;
     private MediaPlayer backgroundsong;
+    private MediaPlayer btnEntrarSound;
+    private static ProgressBar loadEnter;
+    public Player playerR;
+    private int[]  bgs = {R.drawable.playerwarzone_background1, R.drawable.playerwarzone_background2, R.drawable.playerwarzone_background3, R.drawable.playerwarzone_background4};
 
     private String platform = "PLATAFORMA";
 
@@ -36,13 +44,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        backgroundImage = findViewById(R.id.background_Homeimage);
+        loadEnter = findViewById(R.id.loadEnter);
         btnMute = findViewById(R.id.soundMute);
         btnEntrar =  findViewById(R.id.btnEntrar);
         inputNick =  findViewById(R.id.inputNick);
         spinnerPlatform = findViewById(R.id.spinnerPlatform);
 
-        List<String> listaPlatform = new ArrayList<>();
+        backgroundAletario();
 
+        List<String> listaPlatform = new ArrayList<>();
         listaPlatform.add("PLATAFORMA");
         listaPlatform.add("XBOX");
         listaPlatform.add("PS");
@@ -69,35 +80,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnEntrarSound = MediaPlayer.create(MainActivity.this, R.raw.entrandosound);
         backgroundsong = MediaPlayer.create(MainActivity.this, R.raw.backgroundmusicwarzone);
         backgroundsong.start();
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkNick()) {
-                    if (checkSpinner()) {
-                        Intent intent = new Intent(MainActivity.this, StatusActivity.class);
-                        try {
-                            Player player = checkPlayer(getPlayer());
-                            if(!(player == null)){
-                                intent.putExtra("nickName", player.getNickname());
-                                intent.putExtra("platform", player.getPlatform());
-                                startActivity(intent);
-                            }else{
-                                Toast.makeText(getApplicationContext(), "Player não encontrado!", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Selecione a plataforma!", Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-                    Toast.makeText(getApplicationContext(), "Digite seu nick!", Toast.LENGTH_SHORT).show();
-                }
+                backgroundsong.stop();
+                btnEntrarSound.start();
+                entrar();
             }
         });
 
@@ -152,4 +144,47 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    public static void exbirProgresso(boolean visibility){
+        loadEnter.setVisibility(visibility ? View.VISIBLE : View.GONE );
+
+    }
+
+    private void backgroundAletario(){
+        Random random = new Random();
+        int bgSelecionado = random.nextInt(bgs.length);
+        int idBG = bgs[bgSelecionado];
+        backgroundImage.setImageResource(idBG);
+    }
+
+    private void entrar(){
+        if(checkNick()) {
+            if (checkSpinner()) {
+                Intent intent = new Intent(MainActivity.this, StatusActivity.class);
+                try {
+
+                    Player player = checkPlayer(getPlayer());
+
+                    if(!(player == null)){
+                        Toast.makeText(getApplicationContext(), player.getNickname() + " entrando...", Toast.LENGTH_SHORT).show();
+                        intent.putExtra("nickName", player.getNickname());
+                        intent.putExtra("platform", player.getPlatform());
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Player não encontrado!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Selecione a plataforma!", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "Digite seu nick!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

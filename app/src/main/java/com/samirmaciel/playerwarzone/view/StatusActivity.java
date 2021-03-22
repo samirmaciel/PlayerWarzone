@@ -18,7 +18,7 @@ public class StatusActivity extends AppCompatActivity {
     private MediaPlayer entrouSound;
     private ImageView prestigeImage;
 
-    private TextView wins, kills, deaths, downs, kd, level, score, gametime, prestige, contracts, matchs, headshots;
+    private TextView wins, kills, deaths, downs, kd, level, score, gametime, prestige, contracts, matchs, headshots, textNick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,12 @@ public class StatusActivity extends AppCompatActivity {
 
         Player playerLogado = getPlayer(nickname, platform);
 
+        String[] p = playerLogado.getPrestige().split(" ");
+        int prestigeN = Integer.parseInt(p[1]);
 
+        setPrestigeImage(prestigeN);
+
+        textNick = findViewById(R.id.textNick);
         wins = findViewById(R.id.textWinbr);
         kills = findViewById(R.id.textKills);
         deaths = findViewById(R.id.textDeaths);
@@ -50,6 +55,7 @@ public class StatusActivity extends AppCompatActivity {
         headshots = findViewById(R.id.textHeadshots);
         wins.setText(nickname);
 
+        textNick.setText(playerLogado.getNickname());
         wins.setText("Wins: " + playerLogado.getWinsBR());
         kills.setText("Matadas: " + playerLogado.getKills());
         deaths.setText("Mortes: " + playerLogado.getDeaths());
@@ -61,6 +67,44 @@ public class StatusActivity extends AppCompatActivity {
         contracts.setText("Contratos: " + playerLogado.getContracts());
         matchs.setText(playerLogado.getMatchs());
         gametime.setText(playerLogado.getGametime());
+    }
+
+    private void setPrestigeImage(int prestige) {
+        switch (prestige){
+            case 1:
+                prestigeImage.setImageResource(R.drawable.p1);
+                break;
+            case 2:
+                prestigeImage.setImageResource(R.drawable.p2);
+                break;
+            case 3:
+                prestigeImage.setImageResource(R.drawable.p3);
+                break;
+            case 4:
+                prestigeImage.setImageResource(R.drawable.p4);
+                break;
+            case 5:
+                prestigeImage.setImageResource(R.drawable.p5);
+                break;
+            case 6:
+                prestigeImage.setImageResource(R.drawable.p6);
+                break;
+            case 7:
+                prestigeImage.setImageResource(R.drawable.p7);
+                break;
+            case 8:
+                prestigeImage.setImageResource(R.drawable.p8);
+                break;
+            case 9:
+                prestigeImage.setImageResource(R.drawable.p9);
+                break;
+            case 10:
+                prestigeImage.setImageResource(R.drawable.p10);
+                break;
+            case 11:
+                prestigeImage.setImageResource(R.drawable.p11);
+                break;
+        }
     }
 
     public Player getPlayer(String nick, String platform){

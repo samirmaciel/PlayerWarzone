@@ -61,8 +61,7 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
 
 
         try{
-            System.out.println(doc.getElementsByClass("value"));
-            System.out.println(doc.getElementsByClass("playtime").text());
+            System.out.println(doc.getElementsByClass("value").get(2));
             isConnect = true;
         }catch (Exception e){
             isConnect = false;
@@ -71,7 +70,7 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
         if(isConnect) {
             if (doc.getElementsByClass("value").size() > 0) {
                 player.setWinsBR(doc.getElementsByClass("value").get(16).text());
-                player.setKd(doc.getElementsByClass("value").get(7).text());
+                player.setKd(doc.getElementsByClass("value").get(2).text());
                 player.setKills(doc.getElementsByClass("value").get(20).text());
                 player.setDeaths(doc.getElementsByClass("value").get(21).text());
                 player.setDowns(doc.getElementsByClass("value").get(23).text());

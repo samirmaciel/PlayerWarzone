@@ -49,7 +49,6 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
 
         Document doc = null;
         String url = "https://cod.tracker.gg/warzone/profile/"+ player.getPlatform() + "/" + nick + "%23"+ codigo + "/overview";
-        String urlMatchs = "https://cod.tracker.gg/warzone/profile/atvi/dezk%236971848/matches";
 
         try {
             doc = Jsoup.connect(url).get();
@@ -63,6 +62,7 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
 
         try{
             System.out.println(doc.getElementsByClass("value"));
+            System.out.println(doc.getElementsByClass("playtime").text());
             isConnect = true;
         }catch (Exception e){
             isConnect = false;
@@ -70,8 +70,21 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
 
         if(isConnect) {
             if (doc.getElementsByClass("value").size() > 0) {
-                player.setWinsBR(doc.getElementsByClass("value").get(15).text());
-                player.setKd(doc.getElementsByClass("value").get(1).text());
+                player.setWinsBR(doc.getElementsByClass("value").get(16).text());
+                player.setKd(doc.getElementsByClass("value").get(7).text());
+                player.setKills(doc.getElementsByClass("value").get(20).text());
+                player.setDeaths(doc.getElementsByClass("value").get(21).text());
+                player.setDowns(doc.getElementsByClass("value").get(23).text());
+                player.setScore(doc.getElementsByClass("value").get(10).text());
+                player.setLevel(doc.getElementsByClass("highlight-suptext").text());
+                player.setPrestige(doc.getElementsByClass("highlight-text").text());
+                player.setContracts(doc.getElementsByClass("value").get(28).text());
+                player.setMatchs(doc.getElementsByClass("Matches").get(1).text());
+                player.setGametime(doc.getElementsByClass("playtime").get(0).text());
+
+
+
+
                 return player;
             } else {
                 return null;

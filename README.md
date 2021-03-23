@@ -2,7 +2,7 @@
 Aplicativo Android para visualização do status de jogador no Warzone.
 
 
-#### Funcionalidades de visualição de estatísticas do jogador de Warzone
+#### Funcionalidade de exibição da estatísticas do jogador de Warzone
 
 
 Utilzada a biblioteca Jsoup para fazer o web scraping do site https://cod.tracker.gg/warzone.

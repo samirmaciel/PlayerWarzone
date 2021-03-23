@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/playerwarzone_background1" />
+        app:srcCompat="@drawable/status_background1" />
 
     <Button
         android:id="@+id/btnEntrar"

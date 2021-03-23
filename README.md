@@ -8,7 +8,7 @@ Aplicativo Android para visualização do status de jogador no Warzone.
 Utilzada a biblioteca Jsoup para fazer o web scraping do site https://cod.tracker.gg/warzone.
 
 
-### Estatisticas exibidas no aplicativo:
+### Estatísticas exibidas no aplicativo:
 
 * Level
 * Prestige

@@ -2,8 +2,11 @@ package com.samirmaciel.playerwarzone.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,14 +20,15 @@ public class StatusActivity extends AppCompatActivity {
 
     private MediaPlayer entrouSound;
     private ImageView prestigeImage;
-
-    private TextView wins, kills, deaths, downs, kd, level, score, gametime, prestige, contracts, matchs, headshots, textNick;
+    private Button btnTrocarPlayer;
+    private TextView wins, kills, deaths, downs, kd, level, score, gametime, prestige, contracts, matchs, textNick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
+        btnTrocarPlayer = findViewById(R.id.btnTrocarPlayer);
         prestigeImage = findViewById(R.id.prestigeImage);
         entrouSound = MediaPlayer.create(StatusActivity.this, R.raw.entrousound);
         entrouSound.start();
@@ -52,21 +56,30 @@ public class StatusActivity extends AppCompatActivity {
         prestige = findViewById(R.id.textPrestige);
         contracts = findViewById(R.id.textContracts);
         matchs = findViewById(R.id.textMatchs);
-        headshots = findViewById(R.id.textHeadshots);
         wins.setText(nickname);
 
         textNick.setText(playerLogado.getNickname());
         wins.setText("Wins: " + playerLogado.getWinsBR());
-        kills.setText("Matadas: " + playerLogado.getKills());
-        deaths.setText("Mortes: " + playerLogado.getDeaths());
+        kills.setText("Matou: " + playerLogado.getKills());
+        deaths.setText("Morreu: " + playerLogado.getDeaths());
         downs.setText("Derrubadas: " + playerLogado.getDowns());
         kd.setText("K/D: " + playerLogado.getKd());
         score.setText("Pontos: " + playerLogado.getScore());
         prestige.setText(playerLogado.getPrestige());
         level.setText(playerLogado.getLevel());
         contracts.setText("Contratos: " + playerLogado.getContracts());
-        matchs.setText(playerLogado.getMatchs());
-        gametime.setText(playerLogado.getGametime());
+        matchs.setText("Partidas: " + playerLogado.getMatchs());
+        gametime.setText("Tempo de jogo: " + playerLogado.getGametime());
+
+        btnTrocarPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StatusActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void setPrestigeImage(int prestige) {

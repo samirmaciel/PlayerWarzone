@@ -69,6 +69,14 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
 
         if(isConnect) {
             if (doc.getElementsByClass("value").size() > 0) {
+
+                String[] arrayGT = doc.getElementsByClass("playtime").get(0).text().split(" ");
+                String tempoDejogo = arrayGT [0] + " " + arrayGT [1] + " " + arrayGT [2];
+
+                String[] arrayMatchs = doc.getElementsByClass("Matches").get(1).text().split(" ");
+                String matchs = arrayMatchs[0];
+
+
                 player.setWinsBR(doc.getElementsByClass("value").get(16).text());
                 player.setKd(doc.getElementsByClass("value").get(2).text());
                 player.setKills(doc.getElementsByClass("value").get(20).text());
@@ -78,8 +86,8 @@ public class WebScrapingDados extends AsyncTask<Void, Void, Player> {
                 player.setLevel(doc.getElementsByClass("highlight-suptext").text());
                 player.setPrestige(doc.getElementsByClass("highlight-text").text());
                 player.setContracts(doc.getElementsByClass("value").get(28).text());
-                player.setMatchs(doc.getElementsByClass("Matches").get(1).text());
-                player.setGametime(doc.getElementsByClass("playtime").get(0).text());
+                player.setMatchs(matchs);
+                player.setGametime(tempoDejogo);
 
 
 

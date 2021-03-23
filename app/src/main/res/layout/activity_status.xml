@@ -17,19 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/status_background1" />
+        app:srcCompat="@drawable/playerwarzone_background1" />
+
 
     <ImageView
         android:id="@+id/prestigeImage"
         android:layout_width="110dp"
         android:layout_height="118dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/p1" />
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/kdCard"
@@ -57,8 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/headshotsCard"
-        app:layout_constraintTop_toBottomOf="@+id/headshotsCard">
+        app:layout_constraintStart_toStartOf="@+id/matchsCard"
+        app:layout_constraintTop_toBottomOf="@+id/matchsCard">
 
         <TextView
             android:id="@+id/textGametime"
@@ -70,24 +70,6 @@
             android:textColor="@color/white" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/headshotsCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/matchsCard"
-        app:layout_constraintTop_toBottomOf="@+id/matchsCard">
-
-        <TextView
-            android:id="@+id/textHeadshots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="Headshots: 0000"
-            android:textColor="@color/white" />
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/matchsCard"
@@ -246,12 +228,10 @@
         android:id="@+id/winsCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="@+id/nickCardd"
+        app:layout_constraintTop_toBottomOf="@+id/nickCardd">
 
         <TextView
             android:id="@+id/textWinbr"
@@ -267,12 +247,12 @@
         android:id="@+id/nickCardd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/prestigeCard">
 
         <TextView
             android:id="@+id/textNick"
@@ -289,13 +269,23 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="Desenvolvido por @SamirMaciel Beta 1.0v"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnTrocarPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="trocar player"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

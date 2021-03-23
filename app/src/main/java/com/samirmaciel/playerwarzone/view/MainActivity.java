@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer btnEntrarSound;
     private static ProgressBar loadEnter;
     public Player playerR;
-    private int[]  bgs = {R.drawable.playerwarzone_background1, R.drawable.playerwarzone_background2, R.drawable.playerwarzone_background3, R.drawable.playerwarzone_background4};
+    private int[]  bgs = {R.drawable.playerwarzone_background2, R.drawable.playerwarzone_background3, R.drawable.playerwarzone_background4};
 
     private String platform = "PLATAFORMA";
 
@@ -169,7 +169,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), player.getNickname() + " entrando...", Toast.LENGTH_SHORT).show();
                         intent.putExtra("nickName", player.getNickname());
                         intent.putExtra("platform", player.getPlatform());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "Player não encontrado!", Toast.LENGTH_SHORT).show();
                     }

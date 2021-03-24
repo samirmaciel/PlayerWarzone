@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.samirmaciel.playerwarzone.R;
+import com.samirmaciel.playerwarzone.dao.PlayerDAO;
 import com.samirmaciel.playerwarzone.model.Player;
 import com.samirmaciel.playerwarzone.model.WebScrapingDados;
 
@@ -23,6 +24,9 @@ public class StatusActivity extends AppCompatActivity {
     private Button btnTrocarPlayer;
     private TextView wins, kills, deaths, downs, kd, level, score, gametime, prestige, contracts, matchs, textNick;
 
+    private String nickname;
+    private String platform;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +38,8 @@ public class StatusActivity extends AppCompatActivity {
         entrouSound.start();
 
 
-        String nickname = getIntent().getExtras().getString("nickName");
-        String platform = getIntent().getExtras().getString("platform");
 
-        Player playerLogado = getPlayer(nickname, platform);
+        Player playerLogado = checkPlayer();
 
         String[] p = playerLogado.getPrestige().split(" ");
         int prestigeN = Integer.parseInt(p[1]);
@@ -80,6 +82,7 @@ public class StatusActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     private void setPrestigeImage(int prestige) {
@@ -135,8 +138,33 @@ public class StatusActivity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
 
+    private void savePlayer(Player player){
+        PlayerDAO dao = new PlayerDAO(getApplicationContext());
+        dao.limparBanco();
+        dao.inserirPlayer(player);
+    }
 
+    private Player checkPlayer(){
+        PlayerDAO dao = new PlayerDAO(getApplicationContext());
+        Player playerLogado = null;
+        if(dao.buscarPlayer() == null){
+            nickname = getIntent().getExtras().getString("nickName");
+            platform = getIntent().getExtras().getString("platform");
+            playerLogado = getPlayer(nickname, platform);
+            savePlayer(playerLogado);
+            return playerLogado;
+        }else{
+            playerLogado = dao.buscarPlayer();
+            return playerLogado;
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 }

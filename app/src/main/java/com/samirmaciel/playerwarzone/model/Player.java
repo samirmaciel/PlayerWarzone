@@ -18,7 +18,6 @@ public class Player {
     private String kd;
     private String gametime;
     private String matchs;
-    private String headshots;
 
     public Player(String nickname, String platform) {
         this.nickname = nickname;
@@ -137,13 +136,6 @@ public class Player {
         this.matchs = matchs;
     }
 
-    public String getHeadshots() {
-        return headshots;
-    }
-
-    public void setHeadshots(String headshots) {
-        this.headshots = headshots;
-    }
 
     @NonNull
     @Override

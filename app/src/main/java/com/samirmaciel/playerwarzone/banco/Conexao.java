@@ -17,8 +17,8 @@ public class Conexao extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql_players = "CREATE TABLE players (integer id primary key autoincrement, string name, string platform, string level, string prestige, string winsbr, string kills," +
-                "string deaths, string downs, string score, string contracts, string kd, string gametime, string matchs, string headshots); ";
+        String sql_players = "CREATE TABLE players (id integer primary key autoincrement, name string , platform string, level string, prestige string, winsbr string, kills string," +
+                "deaths string, downs string, score string, contracts string, kd string, gametime string, matchs string); ";
 
         db.execSQL(sql_players);
     }

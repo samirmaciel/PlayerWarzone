@@ -18,7 +18,7 @@ public class PlayerDAO {
 
     public void inserirPlayer(Player p){
         ContentValues values = new ContentValues();
-        values.put("nickname", p.getNickname());
+        values.put("name", p.getNickname());
         values.put("platform", p.getPlatform());
         values.put("level", p.getLevel());
         values.put("prestige", p.getPrestige());
@@ -31,7 +31,6 @@ public class PlayerDAO {
         values.put("kd", p.getKd());
         values.put("gametime", p.getGametime());
         values.put("matchs", p.getMatchs());
-        values.put("headshots", p.getHeadshots());
 
         long num = banco.insert("players", null, values);
     }
@@ -41,7 +40,7 @@ public class PlayerDAO {
     }
 
     public Player buscarPlayer(){
-        Cursor c = banco.query("players", new String[]{"id", "nickname", "platform", "level", "pretige", "winsbr", "kills", "deaths", "downs", "score", "contracts", "kd", "gametime", "matchs", "headshots"}, null, null, null, null, null);
+        Cursor c = banco.query("players", new String[]{"id", "name", "platform", "level", "prestige", "winsbr", "kills", "deaths", "downs", "score", "contracts", "kd", "gametime", "matchs"}, null, null, null, null, null);
         while(c.moveToNext()){
             Player p = new Player(c.getString(1), c.getString(2));
             p.setId(c.getInt(0));
@@ -56,7 +55,6 @@ public class PlayerDAO {
             p.setKd(c.getString(11));
             p.setGametime(c.getString(12));
             p.setMatchs(c.getString(13));
-            p.setHeadshots(c.getString(14));
 
             return p;
         }

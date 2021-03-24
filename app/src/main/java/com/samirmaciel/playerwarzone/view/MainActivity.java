@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.samirmaciel.playerwarzone.R;
+import com.samirmaciel.playerwarzone.dao.PlayerDAO;
 import com.samirmaciel.playerwarzone.model.Player;
 import com.samirmaciel.playerwarzone.model.WebScrapingDados;
 
@@ -43,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        btnEntrarSound = MediaPlayer.create(MainActivity.this, R.raw.entrandosound);
+        backgroundsong = MediaPlayer.create(MainActivity.this, R.raw.backgroundmusicwarzone);
+        backgroundsong.start();
+
+        checkPlayer();
 
         backgroundImage = findViewById(R.id.background_Homeimage);
         loadEnter = findViewById(R.id.loadEnter);
@@ -80,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnEntrarSound = MediaPlayer.create(MainActivity.this, R.raw.entrandosound);
-        backgroundsong = MediaPlayer.create(MainActivity.this, R.raw.backgroundmusicwarzone);
-        backgroundsong.start();
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +190,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }else{
             Toast.makeText(getApplicationContext(), "Digite seu nick!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkPlayer(){
+        PlayerDAO dao = new PlayerDAO(getApplicationContext());
+        if(dao.buscarPlayer() == null){
+            return;
+        }else{
+            backgroundsong.stop();
+            Intent intent = new Intent(MainActivity.this, StatusActivity.class);
+            startActivity(intent);
+            finish();
+
         }
     }
 

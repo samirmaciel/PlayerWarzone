@@ -76,6 +76,8 @@ public class StatusActivity extends AppCompatActivity {
         btnTrocarPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PlayerDAO dao = new PlayerDAO(getApplicationContext());
+                dao.limparBanco();
                 Intent intent = new Intent(StatusActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

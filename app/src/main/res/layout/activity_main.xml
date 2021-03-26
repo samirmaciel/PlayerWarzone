@@ -83,7 +83,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Desenvolvido por @SamirMaciel Beta 1.0v"
+        android:text="@string/version"
         android:textColor="@color/white"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

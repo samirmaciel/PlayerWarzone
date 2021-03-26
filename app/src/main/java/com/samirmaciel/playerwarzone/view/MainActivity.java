@@ -1,6 +1,8 @@
 package com.samirmaciel.playerwarzone.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -174,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), player.getNickname() + " entrando...", Toast.LENGTH_SHORT).show();
                         intent.putExtra("nickName", player.getNickname());
                         intent.putExtra("platform", player.getPlatform());
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
+                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.mover_esquerda);
+                        ActivityCompat.startActivity(MainActivity.this, intent, activityOptionsCompat.toBundle());
+                        //finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "Player não encontrado!", Toast.LENGTH_SHORT).show();
                     }
@@ -200,7 +202,8 @@ public class MainActivity extends AppCompatActivity {
         }else{
             backgroundsong.stop();
             Intent intent = new Intent(MainActivity.this, StatusActivity.class);
-            startActivity(intent);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.mover_esquerda);
+            ActivityCompat.startActivity(MainActivity.this, intent, activityOptionsCompat.toBundle());
             finish();
 
         }

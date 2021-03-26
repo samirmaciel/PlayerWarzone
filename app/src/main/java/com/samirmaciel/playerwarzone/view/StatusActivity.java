@@ -1,6 +1,8 @@
 package com.samirmaciel.playerwarzone.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -35,7 +37,7 @@ public class StatusActivity extends AppCompatActivity {
         btnTrocarPlayer = findViewById(R.id.btnTrocarPlayer);
         prestigeImage = findViewById(R.id.prestigeImage);
         entrouSound = MediaPlayer.create(StatusActivity.this, R.raw.entrousound);
-        entrouSound.start();
+
 
 
 
@@ -79,11 +81,13 @@ public class StatusActivity extends AppCompatActivity {
                 PlayerDAO dao = new PlayerDAO(getApplicationContext());
                 dao.limparBanco();
                 Intent intent = new Intent(StatusActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.mover_esquerda);
+                ActivityCompat.startActivity(StatusActivity.this, intent, activityOptionsCompat.toBundle());
                 finish();
             }
         });
+
+        entrouSound.start();
 
     }
 

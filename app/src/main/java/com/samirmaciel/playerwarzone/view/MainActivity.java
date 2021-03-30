@@ -32,10 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnEntrar;
     private EditText inputNick;
     private Spinner spinnerPlatform;
-    private ImageView backgroundImage;
-    private ImageView btnMute;
-    private MediaPlayer backgroundsong;
-    private MediaPlayer btnEntrarSound;
+    private ImageView backgroundImage, btnMute;
+    private MediaPlayer backgroundsong, btnEntrarSound;
     private static ProgressBar loadEnter;
     public Player playerR;
     private int[]  bgs = {R.drawable.playerwarzone_background2, R.drawable.playerwarzone_background3, R.drawable.playerwarzone_background4};
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         backgroundsong = MediaPlayer.create(MainActivity.this, R.raw.backgroundmusicwarzone);
         backgroundsong.start();
 
-        checkPlayer();
+        checkPlayerSalvo();
 
         backgroundImage = findViewById(R.id.background_Homeimage);
         loadEnter = findViewById(R.id.loadEnter);
@@ -117,11 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private Player getPlayer(){
 
         Player player = new Player(inputNick.getText().toString(), platform);
-
-
         return player;
-
-
     }
 
     private Player checkPlayer(Player player) throws ExecutionException, InterruptedException {
@@ -136,19 +130,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkSpinner(){
-        if(platform.equalsIgnoreCase("PLATAFORMA")){
-            return false;
-        }else{
-            return true;
-        }
-    }
 
-    private boolean checkNick(){
-        if(inputNick.getText().toString().equalsIgnoreCase("")){
-            return false;
+    private boolean checkCampos(){
+        if(!inputNick.getText().toString().equalsIgnoreCase("")){
+            if(!platform.equalsIgnoreCase("PLATAFORMA")){
+                return true;
+            }else{
+                Toast.makeText(getApplicationContext(), "Selecione a plataforma!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }else{
-            return true;
+            Toast.makeText(getApplicationContext(), "Preencha o NOME ID!", Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
@@ -165,37 +158,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void entrar(){
-        if(checkNick()) {
-            if (checkSpinner()) {
-                Intent intent = new Intent(MainActivity.this, StatusActivity.class);
-                try {
+        if(checkCampos()) {
+            Intent intent = new Intent(MainActivity.this, StatusActivity.class);
+            try {
 
-                    Player player = checkPlayer(getPlayer());
+                Player player = checkPlayer(getPlayer());
 
-                    if(!(player == null)){
-                        Toast.makeText(getApplicationContext(), player.getNickname() + " entrando...", Toast.LENGTH_SHORT).show();
-                        intent.putExtra("nickName", player.getNickname());
-                        intent.putExtra("platform", player.getPlatform());
-                        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.mover_esquerda);
-                        ActivityCompat.startActivity(MainActivity.this, intent, activityOptionsCompat.toBundle());
-                        //finish();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Player não encontrado!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (!(player == null)) {
+                    Toast.makeText(getApplicationContext(), player.getNickname() + " entrando...", Toast.LENGTH_SHORT).show();
+                    intent.putExtra("nickName", player.getNickname());
+                    intent.putExtra("platform", player.getPlatform());
+                    ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.mover_esquerda);
+                    ActivityCompat.startActivity(MainActivity.this, intent, activityOptionsCompat.toBundle());
+                    //finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Player não encontrado!", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "Selecione a plataforma!", Toast.LENGTH_SHORT).show();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }else{
-            Toast.makeText(getApplicationContext(), "Digite seu nick!", Toast.LENGTH_SHORT).show();
+            return;
         }
     }
 
-    private void checkPlayer(){
+    private void checkPlayerSalvo(){
         PlayerDAO dao = new PlayerDAO(getApplicationContext());
         if(dao.buscarPlayer() == null){
             return;

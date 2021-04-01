@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         inputNick =  findViewById(R.id.inputNick);
         spinnerPlatform = findViewById(R.id.spinnerPlatform);
 
-        backgroundAletario();
+        backgroundAleatorio();
 
         List<String> listaPlatform = new ArrayList<>();
         listaPlatform.add("PLATAFORMA");
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void backgroundAletario(){
+    private void backgroundAleatorio(){
         Random random = new Random();
         int bgSelecionado = random.nextInt(bgs.length);
         int idBG = bgs[bgSelecionado];
